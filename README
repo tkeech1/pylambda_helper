@@ -1,0 +1,2 @@
+# run tests
+docker run -it --rm -v ~/projects/python_lambda/python_lambda_shared:/app tkeech1/serverless-build:0.1 /bin/bash -c 'pip3 install -r requirements.txt && python3 -m pytest'
