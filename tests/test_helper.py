@@ -126,5 +126,6 @@ class lambda_helper_db_test(unittest.TestCase):
         dynamodb.Table(self.table_name).put_item(Item={self.id_name:self.existing_id})
         self.assertEqual(self.existing_id,lambda_helper.query_for_one(self.table_name,self.id_name,self.existing_id)[self.id_name])
         self.assertEqual(None,lambda_helper.query_for_one(self.table_name,self.id_name,self.nonexistent_id))
-        self.assertRaises(Exception, lambda_helper.query_for_one(self.table_name,'bad_id',self.nonexistent_id))
-        #self.assertRaises(ClientError, lambda_helper.query_for_one('bad_table',self.id_name,self.nonexistent_id))
+        self.assertEqual(None,lambda_helper.query_for_one(self.table_name,'bad_id',self.nonexistent_id))
+        with self.assertRaises(Exception):            
+            result = lambda_helper.query_for_one('bad_table',self.id_name,self.nonexistent_id)
