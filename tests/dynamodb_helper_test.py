@@ -51,10 +51,12 @@ class dynamodb_helper_test(unittest.TestCase):
     def test_put_item(self):
         dynamodb = boto3.resource('dynamodb')        
         dynamodb.create_table(AttributeDefinitions=self.attribute_defs, KeySchema=self.key_schema, TableName=self.table_name,ProvisionedThroughput=self.provisioned_throughput)
+        with self.assertRaises(Exception):
+            dynamodb_helper.put_item('bad_table',{'id':self.nonexistent_id})
         dynamodb_helper.put_item(self.table_name,{'id':self.nonexistent_id})
-        self.assertEqual(self.nonexistent_id,dynamodb_helper.query_for_one(self.table_name,self.id_name,self.nonexistent_id)[self.id_name])
+        self.assertEqual(self.nonexistent_id,dynamodb_helper.query_for_one(self.table_name,self.id_name,self.nonexistent_id)[self.id_name])        
+        # TODO
         #empty item
-        #invalid table
         #item has no id
         #item is not json
         #ok item
