@@ -5,5 +5,11 @@
 
 1) Run tests in Docker - use any docker image that contains pip3 and python3
 ```
-docker run -it --rm -v <PATH_TO_SOURCE>:/app <DOCKER_IMAGE> /bin/bash -c 'pip3 install -r requirements.txt && python3 -m pytest'
+docker build -t pylambda_helper:latest . 
+docker run -it --rm -v ${PWD}:/app pylambda_helper:latest python3 -m pytest
+```
+-Or-
+
+```
+make test-local
 ```
