@@ -11,11 +11,6 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && mkdir -p /home/$USERNAME/.vscode-server /home/$USERNAME/.vscode-server-insiders \
     && chown ${USER_UID}:${USER_GID} /home/$USERNAME/.vscode-server*
 
-# [Optional] Add sudo support
-#&& apt-get install -y sudo \
-#&& echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
-#&& chmod 0440 /etc/sudoers.d/$USERNAME
-
 # ********************************************************
 # * Anything else you want to do like clean up goes here *
 # ********************************************************
